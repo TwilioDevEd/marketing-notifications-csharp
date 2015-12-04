@@ -22,7 +22,7 @@ namespace MarketingNotifications.Web.Models.Repository
 
         public async Task<Subscriber> FindByPhoneNumberAsync(string phoneNumber)
         {
-            return await _context.Subscribers.FirstAsync(s => s.PhoneNumber == phoneNumber);
+            return await _context.Subscribers.FirstOrDefaultAsync(s => s.PhoneNumber == phoneNumber);
         }
 
         public async Task<int> CreateAsync(Subscriber subscriber)

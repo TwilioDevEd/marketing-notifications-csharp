@@ -21,7 +21,7 @@ namespace MarketingNotifications.Web.Domain
             var subscriberExists = subscriber != null;
             if (!subscriberExists)
             {
-                subscriber = new Subscriber {PhoneNumber = phoneNumber};
+                subscriber = new Subscriber {PhoneNumber = phoneNumber, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now};
                 await _repository.CreateAsync(subscriber);
             }
 
@@ -44,6 +44,7 @@ namespace MarketingNotifications.Web.Domain
 
             var isSubscribed = message == "subscribe";
             subscriber.Subscribed = isSubscribed;
+            subscriber.UpdatedAt = DateTime.Now;
             await _repository.UpdateAsync(subscriber);
 
             return !isSubscribed
