@@ -6,7 +6,7 @@ namespace MarketingNotifications.Web.Models.Repository
 {
     public interface ISubscribersRepository
     {
-        Task<Subscriber> FindByPhoneNumber(string phoneNumber);
+        Task<Subscriber> FindByPhoneNumberAsync(string phoneNumber);
         Task<int> CreateAsync(Subscriber subscriber);
         Task<int> UpdateAsync(Subscriber subscriber);
     }
@@ -20,7 +20,7 @@ namespace MarketingNotifications.Web.Models.Repository
             _context = new MarketingNotificationsContext();
         }
 
-        public async Task<Subscriber> FindByPhoneNumber(string phoneNumber)
+        public async Task<Subscriber> FindByPhoneNumberAsync(string phoneNumber)
         {
             return await _context.Subscribers.FirstAsync(s => s.PhoneNumber == phoneNumber);
         }
