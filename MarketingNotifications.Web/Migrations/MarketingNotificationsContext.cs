@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using MarketingNotifications.Web.Models;
 
-namespace MarketingNotifications.Web
+namespace MarketingNotifications.Web.Migrations
 {
     public class MarketingNotificationsContext : DbContext
     {

@@ -132,7 +132,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MarketingNotificationsContext.cs" />
+    <Compile Include="Migrations\MarketingNotificationsContext.cs" />
     <Compile Include="Migrations\201512040051256_CreateSubscribers.cs" />
     <Compile Include="Migrations\201512040051256_CreateSubscribers.Designer.cs">
       <DependentUpon>201512040051256_CreateSubscribers.cs</DependentUpon>
