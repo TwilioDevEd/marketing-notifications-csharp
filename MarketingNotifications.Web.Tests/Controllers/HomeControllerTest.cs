@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MarketingNotifications.Web;
+﻿using System.Web.Mvc;
 using MarketingNotifications.Web.Controllers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MarketingNotifications.Web.Tests.Controllers
 {
