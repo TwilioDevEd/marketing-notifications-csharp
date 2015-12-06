@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using MarketingNotifications.Web.Migrations;
 
@@ -7,7 +8,7 @@ namespace MarketingNotifications.Web.Models.Repository
 {
     public interface ISubscribersRepository
     {
-        Task<List<Subscriber>> FindAllAsync();
+        Task<List<Subscriber>> FindActiveSubscribersAsync();
         Task<Subscriber> FindByPhoneNumberAsync(string phoneNumber);
         Task<int> CreateAsync(Subscriber subscriber);
         Task<int> UpdateAsync(Subscriber subscriber);
@@ -22,9 +23,11 @@ namespace MarketingNotifications.Web.Models.Repository
             _context = new MarketingNotificationsContext();
         }
 
-        public async Task<List<Subscriber>> FindAllAsync()
+        public async Task<List<Subscriber>> FindActiveSubscribersAsync()
         {
-            return await _context.Subscribers.ToListAsync();
+            return await _context.Subscribers
+                .Where(s => s.Subscribed)
+                .ToListAsync();
         }
 
         public async Task<Subscriber> FindByPhoneNumberAsync(string phoneNumber)

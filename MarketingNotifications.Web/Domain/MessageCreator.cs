@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using MarketingNotifications.Web.Models;
 using MarketingNotifications.Web.Models.Repository;
@@ -21,7 +20,12 @@ namespace MarketingNotifications.Web.Domain
             var subscriberExists = subscriber != null;
             if (!subscriberExists)
             {
-                subscriber = new Subscriber {PhoneNumber = phoneNumber, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now};
+                subscriber = new Subscriber
+                {
+                    PhoneNumber = phoneNumber,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
                 await _repository.CreateAsync(subscriber);
             }
 
@@ -41,7 +45,7 @@ namespace MarketingNotifications.Web.Domain
                 return "Sorry, we don't recognize that command. Available commands are: 'subscribe' or 'unsubscribe'.";
             }
 
-            var isSubscribed = message == "subscribe";
+            var isSubscribed = message.StartsWith(subscribe);
             subscriber.Subscribed = isSubscribed;
             subscriber.UpdatedAt = DateTime.Now;
             await _repository.UpdateAsync(subscriber);

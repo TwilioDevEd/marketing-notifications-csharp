@@ -33,7 +33,7 @@ namespace MarketingNotifications.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var subscribers = await _repository.FindAllAsync();
+                var subscribers = await _repository.FindActiveSubscribersAsync();
                 subscribers.ForEach(subscriber =>
                 {
                     _messageSender.Send(

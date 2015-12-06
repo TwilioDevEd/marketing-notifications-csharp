@@ -26,7 +26,7 @@ namespace MarketingNotifications.Web.Tests.Controllers
         {
             var mockMessageSender = new Mock<IMessageSender>();
             var mockRepository = new Mock<ISubscribersRepository>();
-            mockRepository.Setup(r => r.FindAllAsync()).ReturnsAsync(
+            mockRepository.Setup(r => r.FindActiveSubscribersAsync()).ReturnsAsync(
                 new List<Subscriber>
                 {
                     new Subscriber(),
