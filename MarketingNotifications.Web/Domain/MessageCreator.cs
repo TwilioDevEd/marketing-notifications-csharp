@@ -26,7 +26,7 @@ namespace MarketingNotifications.Web.Domain
             }
 
             return subscriberExists
-                ? await CreateOutputMessage(subscriber, message)
+                ? await CreateOutputMessage(subscriber, message.ToLower())
                 : "Thanks for contacting TWBC! Text 'subscribe' if you would to receive updates via text message.";
 
         }
@@ -36,8 +36,7 @@ namespace MarketingNotifications.Web.Domain
             const string subscribe = "subscribe";
             const string unsubscribe = "unsubscribe";
 
-            var allowedMessages = new[] {subscribe, unsubscribe};
-            if (!allowedMessages.Contains(message))
+            if (!message.StartsWith(subscribe) && !message.StartsWith(unsubscribe))
             {
                 return "Sorry, we don't recognize that command. Available commands are: 'subscribe' or 'unsubscribe'.";
             }

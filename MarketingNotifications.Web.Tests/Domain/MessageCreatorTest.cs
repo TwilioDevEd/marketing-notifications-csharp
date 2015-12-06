@@ -23,7 +23,7 @@ namespace MarketingNotifications.Web.Tests.Domain
         }
 
         [Test]
-        public async Task WhenSubscriberExistAndMessageIsSubscribe_ThenResponseContainsThanksMessage()
+        public async Task WhenSubscriberExistAndMessageIsSubscribe_ThenResponseContainsSubscribedMessage()
         {
             var mockRepository = new Mock<ISubscribersRepository>();
             mockRepository.Setup(r => r.FindByPhoneNumberAsync(It.IsAny<string>()))
@@ -37,7 +37,7 @@ namespace MarketingNotifications.Web.Tests.Domain
         }
 
         [Test]
-        public async Task WhenSubscriberExistAndMessageIsUnsubscribe_ThenResponseContainsThanksMessage()
+        public async Task WhenSubscriberExistAndMessageIsUnsubscribe_ThenResponseContainsUnsubscribedMessage()
         {
             var mockRepository = new Mock<ISubscribersRepository>();
             mockRepository.Setup(r => r.FindByPhoneNumberAsync(It.IsAny<string>()))

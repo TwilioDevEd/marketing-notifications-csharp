@@ -19,7 +19,7 @@ namespace MarketingNotifications.Web.Controllers
             _repository = repository;
         }
 
-        // GET: Subscriptions/Register
+        // GET: Subscribers/Register
         public async Task<ActionResult> Register(string from, String body)
         {
             var phoneNumber = from;
