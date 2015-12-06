@@ -1,8 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace MarketingNotifications.Web.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class CreateSubscribers : DbMigration
     {
         public override void Up()
