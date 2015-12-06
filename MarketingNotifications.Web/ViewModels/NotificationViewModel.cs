@@ -8,6 +8,7 @@ namespace MarketingNotifications.Web.ViewModels
         [Required]
         public string Message { get; set; }
 
+        [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }
     }
 }

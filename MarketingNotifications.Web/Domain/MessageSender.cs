@@ -5,7 +5,7 @@ namespace MarketingNotifications.Web.Domain
 {
     public interface IMessageSender
     {
-        void Send(string to, string body, string imageUrl);
+        void Send(string to, string body, params string[] imageUrl);
     }
 
     public class MessageSender : IMessageSender
@@ -24,7 +24,7 @@ namespace MarketingNotifications.Web.Domain
         }
 
 
-        public void Send(string to, string body, string imageUrl)
+        public void Send(string to, string body, params string[] imageUrl)
         {
             _client.SendMessage(Configuration.PhoneNumbers.Twilio, to, body, imageUrl);
         }
