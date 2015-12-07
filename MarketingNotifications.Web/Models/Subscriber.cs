@@ -9,6 +9,5 @@ namespace MarketingNotifications.Web.Models
         public bool Subscribed { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
     }
 }

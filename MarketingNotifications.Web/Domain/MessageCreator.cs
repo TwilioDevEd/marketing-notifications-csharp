@@ -32,7 +32,6 @@ namespace MarketingNotifications.Web.Domain
             return subscriberExists
                 ? await CreateOutputMessage(subscriber, message.ToLower())
                 : "Thanks for contacting TWBC! Text 'subscribe' if you would to receive updates via text message.";
-
         }
 
         private async Task<string> CreateOutputMessage(Subscriber subscriber, string message)
