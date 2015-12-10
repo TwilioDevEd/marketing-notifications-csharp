@@ -8,6 +8,8 @@ namespace MarketingNotifications.Web.Domain
     public class MessageCreator
     {
         private readonly ISubscribersRepository _repository;
+        private const string Subscribe = "subscribe";
+        private const string Unsubscribe = "unsubscribe";
 
         public MessageCreator(ISubscribersRepository repository)
         {
@@ -17,41 +19,41 @@ namespace MarketingNotifications.Web.Domain
         public async Task<String> Create(string phoneNumber, string message)
         {
             var subscriber = await _repository.FindByPhoneNumberAsync(phoneNumber);
-            var subscriberExists = subscriber != null;
-            if (!subscriberExists)
+            if (subscriber != null)
             {
-                subscriber = new Subscriber
-                {
-                    PhoneNumber = phoneNumber,
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now
-                };
-                await _repository.CreateAsync(subscriber);
+                return await CreateOutputMessage(subscriber, message.ToLower());
             }
 
-            return subscriberExists
-                ? await CreateOutputMessage(subscriber, message.ToLower())
-                : "Thanks for contacting TWBC! Text 'subscribe' if you would to receive updates via text message.";
+            subscriber = new Subscriber
+            {
+                PhoneNumber = phoneNumber,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            };
+            await _repository.CreateAsync(subscriber);
+            return "Thanks for contacting TWBC! Text 'subscribe' if you would to receive updates via text message.";
         }
 
         private async Task<string> CreateOutputMessage(Subscriber subscriber, string message)
         {
-            const string subscribe = "subscribe";
-            const string unsubscribe = "unsubscribe";
-
-            if (!message.StartsWith(subscribe) && !message.StartsWith(unsubscribe))
+            if (!IsValidCommand(message))
             {
                 return "Sorry, we don't recognize that command. Available commands are: 'subscribe' or 'unsubscribe'.";
             }
 
-            var isSubscribed = message.StartsWith(subscribe);
+            var isSubscribed = message.StartsWith(Subscribe);
             subscriber.Subscribed = isSubscribed;
             subscriber.UpdatedAt = DateTime.Now;
             await _repository.UpdateAsync(subscriber);
 
-            return !isSubscribed
-                ? "You have unsubscribed from notifications. Test 'subscribe' to start receieving updates again"
-                : "You are now subscribed for updates.";
+            return isSubscribed
+                ? "You are now subscribed for updates."
+                : "You have unsubscribed from notifications. Test 'subscribe' to start receieving updates again";
+        }
+
+        private static bool IsValidCommand(string command)
+        {
+            return command.StartsWith(Subscribe) || command.StartsWith(Unsubscribe);
         }
     }
 }
