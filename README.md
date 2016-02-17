@@ -4,6 +4,8 @@
 
 Use Twilio to create sms notifications to keep your subscribers in the loop.
 
+[Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/marketing-notifications/csharp/mvc)!
+
 ## Local Development
 
 1. You will need to configure Twilio to send requests to your application when SMS are received.
