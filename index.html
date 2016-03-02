@@ -60,14 +60,14 @@ subscribers.</p>
 request</a>. Now, we need to find a
 <code>Subscriber</code> model with that phone number.</p>
 <p>If there&#39;s no subscriber with this phone number, we create one, save it, and
-respond with a message asking them to text &quot;subscribe&quot; to confirm that
+respond with a message asking them to text &quot;add&quot; to confirm that
 they want to receive messages from us.</p>
 <p>And that&#39;s all we want at this step! We&#39;ve created a <code>Subscriber</code> model to
 keep track of the people that want our messages, and saved them in the
 database when they text us for the first time.</p>
 </div><div data-title="Manage Subscriptions" data-file="MarketingNotifications.Web/Domain/MessageCreator.cs" data-highlight="37-57" class="step"><h2 id="manage-subscriptions">Manage Subscriptions</h2>
 <p>  We want to provide the user with two SMS commands to manage their
-  subscription status: <code>subscribe</code> and <code>unsubscribe</code>.  These commands will
+  subscription status: <code>add</code> and <code>remove</code>.  These commands will
   toggle a boolean flag for their <code>Subscriber</code> record in the database, and
   will determine whether or not they receive messages from our marketing
   campaign. Because we&#39;re not jerks, we don&#39;t opt them in automatically -
@@ -78,7 +78,7 @@ database when they text us for the first time.</p>
 <ul>
 <li>If the texter is a person already in the database, parse the message
 they sent to see if it&#39;s a command we recognize.</li>
-<li>If it is a <code>subscribe</code> or <code>unsubscribe</code> command, update their
+<li>If it is a <code>add</code> or <code>remove</code> command, update their
 subscription status in the database.</li>
 <li>If it is a command we don&#39;t recognize, send them a message explaining
 available commands.</li>
