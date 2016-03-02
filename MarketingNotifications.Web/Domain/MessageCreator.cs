@@ -8,8 +8,8 @@ namespace MarketingNotifications.Web.Domain
     public class MessageCreator
     {
         private readonly ISubscribersRepository _repository;
-        private const string Subscribe = "subscribe";
-        private const string Unsubscribe = "unsubscribe";
+        private const string Subscribe = "add";
+        private const string Unsubscribe = "remove";
 
         public MessageCreator(ISubscribersRepository repository)
         {
@@ -31,14 +31,14 @@ namespace MarketingNotifications.Web.Domain
                 UpdatedAt = DateTime.Now
             };
             await _repository.CreateAsync(subscriber);
-            return "Thanks for contacting TWBC! Text 'subscribe' if you would to receive updates via text message.";
+            return "Thanks for contacting TWBC! Text 'add' if you would to receive updates via text message.";
         }
 
         private async Task<string> CreateOutputMessage(Subscriber subscriber, string message)
         {
             if (!IsValidCommand(message))
             {
-                return "Sorry, we don't recognize that command. Available commands are: 'subscribe' or 'unsubscribe'.";
+                return "Sorry, we don't recognize that command. Available commands are: 'add' or 'remove'.";
             }
 
             var isSubscribed = message.StartsWith(Subscribe);
@@ -48,7 +48,7 @@ namespace MarketingNotifications.Web.Domain
 
             return isSubscribed
                 ? "You are now subscribed for updates."
-                : "You have unsubscribed from notifications. Test 'subscribe' to start receieving updates again";
+                : "You have unsubscribed from notifications. Test 'add' to start receiving updates again";
         }
 
         private static bool IsValidCommand(string command)
