@@ -30,7 +30,7 @@ namespace MarketingNotifications.Web.Tests.Domain
                 .ReturnsAsync(new Subscriber { PhoneNumber = "555-5555" });
 
             var messageCreator = new MessageCreator(mockRepository.Object);
-            var message = await messageCreator.Create("555-5555", "subscribe");
+            var message = await messageCreator.Create("555-5555", "add");
 
             StringAssert.Contains("subscribed", message);
             mockRepository.Verify(r => r.UpdateAsync(It.IsAny<Subscriber>()), Times.Once);
@@ -44,7 +44,7 @@ namespace MarketingNotifications.Web.Tests.Domain
                 .ReturnsAsync(new Subscriber { PhoneNumber = "555-5555" });
 
             var messageCreator = new MessageCreator(mockRepository.Object);
-            var message = await messageCreator.Create("555-5555", "unsubscribe");
+            var message = await messageCreator.Create("555-5555", "remove");
 
             StringAssert.Contains("unsubscribed", message);
             mockRepository.Verify(r => r.UpdateAsync(It.IsAny<Subscriber>()), Times.Once);
