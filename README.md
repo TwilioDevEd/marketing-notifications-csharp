@@ -58,7 +58,7 @@ In this tutorial, you will learn how to enable your users to opt-in for an SMS m
 
 1. Wrap Up!
 
-  By now your application should be up and running at [http://localhost:1086/](http://localhost:1086/). Now your subscribers will be able to text your new Twilio number to Subscribe to your Marketing Notifications Service.
+  By now your application should be up and running at [http://localhost:1086/](http://localhost:1086/). Now your subscribers will be able to text your new Twilio number to subscribe to your Marketing Notifications service.
 
 ## Meta
 
