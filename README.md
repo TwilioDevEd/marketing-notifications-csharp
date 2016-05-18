@@ -2,23 +2,44 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/8qo4wqir0ev9es59?svg=true)](https://ci.appveyor.com/project/TwilioDevEd/marketing-notifications-csharp)
 
-Use Twilio to create sms notifications to keep your subscribers in the loop.
+With the amount of noise in social media and e-mail inboxes, it's hard to make a meaningful connection with your customers or audience. SMS text and/or MMS picture messages, however, are a personal communication channel with an open rate above 95%, which make them a great choice for social communication.
+
+In this tutorial, you will learn how to enable your users to opt-in for an SMS marketing campaign using their mobile phone.
 
 [Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/marketing-notifications/csharp/mvc)!
 
 ## Local Development
 
-1. You will need to configure Twilio to send requests to your application when SMS are received.
+1. First clone this repository and `cd` into it.
 
-   You will need to provision at least one Twilio number with sms capabilities so the application's users can make property reservations. You can buy a number [right here](https://www.twilio.com/user/account/phone-numbers/search). Once you have a number you need to configure it to work with your application. Open [the number management page](https://www.twilio.com/user/account/phone-numbers/incoming) and open a number's configuration by clicking on it.
+   ```shell
+   git clone git@github.com:TwilioDevEd/marketing-notifications-csharp.git
+   cd marketing-notifications-csharp
+   ```
 
-   Remember that the number of which you change the _SMS webhook_ must be the same one you set on the `TwilioPhoneNumber` setting.
+1. Create a new file `MarketingNotifications.Web/Local.config` and update the content.
 
-   ![Configure Voice](http://howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif)
+   ```xml
+   <appSettings>
+     <add key="TwilioAccountSid" value="Your Twilio Account SID" />
+     <add key="TwilioAuthToken" value="Your Twilio Auth Token" />
+     <add key="TwilioPhoneNumber" value="Your Twilio Phone Number" />
+   </appSettings>
+   ```
+   You can find your `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` in your
+   [Twilio Account Settings](https://www.twilio.com/user/account/settings).
+   You will also need a `TWILIO_NUMBER`, which you may find [here](https://www.twilio.com/user/account/phone-numbers/incoming).
 
+1. Build the solution.
+
+1. Run `Update-Database` at [Package Manager Console](https://docs.nuget.org/consume/package-manager-console) to execute the migrations.
+
+1. Run the application.
+
+1. Expose application to the wider internet.
    To start using `ngrok` on our project you'll have to execute the following line in the _command prompt_
 
-   ```
+   ```shell
    ngrok http 1086 -host-header="localhost:1086"
    ```
 
@@ -28,34 +49,16 @@ Use Twilio to create sms notifications to keep your subscribers in the loop.
    http://<your-ngrok-subdomain>.ngrok.io/Subscribers/Register
    ```
 
-2. Clone this repository and `cd` into it.
+1. Configure your Twilio number.
 
-  ```
-   git clone git@github.com:TwilioDevEd/marketing-notifications-csharp.git
-   cd marketing-notifications-csharp
-   ```
+  Go to your dashboard on [Twilio](https://www.twilio.com/user/account/phone-numbers/incoming). Click on Twilio Numbers and choose a number to setup.
+  On the phone number page enter the address provided by ngrok into the _Messaging_ Request URL field.
 
-3. Create a new file `MarketingNotifications.Web/Local.config` and update the content.
+  ![Request URL](http://howtodocs.s3.amazonaws.com/setup-twilio-number.png)
 
-   ```
-   <appSettings>
-     <add key="TwilioAccountSid" value="Your Twilio Account SID" />
-     <add key="TwilioAuthToken" value="Your Twilio Auth Token" />
-     <add key="TwilioPhoneNumber" value="Your Twilio Phone Number" />
-   </appSettings>
-   ```
+1. Wrap Up!
 
-4. Build the solution.
-
-5. Run `Update-Database` at [Package Manager Console](https://docs.nuget.org/consume/package-manager-console) to execute the migrations.
-
-6. Run the application.
-
-7. Check it out at [http://localhost:1086](http://localhost:1086)
-
-That's it!
-
-To let our Twilio Phone number use the callback endpoint we exposed, our development server will need to be publicly accessible. [We recommend using ngrok to solve this problem](https://www.twilio.com/blog/2015/09/6-awesome-reasons-to-use-ngrok-when-testing-webhooks.html).
+  By now your application should be up and running at [http://localhost:1086/](http://localhost:1086/). Now your subscribers will be able to text your new Twilio number to subscribe to your Marketing Notifications service.
 
 ## Meta
 
