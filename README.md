@@ -36,7 +36,7 @@ In this tutorial, you will learn how to enable your users to opt-in for an SMS m
 
 1. Run the application.
 
-1. Expose application to the wider internet
+1. Expose application to the wider internet.
    To start using `ngrok` on our project you'll have to execute the following line in the _command prompt_
 
    ```shell
