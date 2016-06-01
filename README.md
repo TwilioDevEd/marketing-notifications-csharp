@@ -1,3 +1,7 @@
+<a href="https://www.twilio.com">
+  <img src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg" alt="Twilio" width="250" />
+</a>
+
 # SMS Notifications with Twilio and ASP.NET MVC
 
 [![Build status](https://ci.appveyor.com/api/projects/status/8qo4wqir0ev9es59?svg=true)](https://ci.appveyor.com/project/TwilioDevEd/marketing-notifications-csharp)
