@@ -1,4 +1,4 @@
-.step(data-title='Introduction')
+.step(data-title='SMS and MMS Marketing Notifications')
   :markdown
     ## SMS and MMS Marketing Notifications
 
@@ -36,8 +36,8 @@
 
     * The `PhoneNumber` will allow the application to know where to send the
     notifications.
-    * `Subscribed` let the application to identify which subscribers are
-    active, only an active subscriber will receive notifications.
+    * `Subscribed` lets the application identify which subscribers are
+    active, only active subscribers will receive notifications.
 
     **See Also**
     * [Code First Migrations](//msdn.microsoft.com/en-us/data/jj591621.aspx)
@@ -67,13 +67,13 @@
   :markdown
     ## Creating Subscribers
 
-    We begin by getting the texter's phone number from the incoming [Twilio
+    We begin by getting the user's phone number from the incoming [Twilio
     request](/docs/api/twiml/sms/twilio_request). Now, we need to find a
     `Subscriber` model with that phone number.
 
     If there's no subscriber with this phone number, we create one, save it, and
-    respond with a message asking them to text "add" to confirm that
-    they want to receive messages from us.
+    respond with a message asking to reply "add" back, to confirm their desire
+    to receive messages from us.
 
     And that's all we want at this step! We've created a `Subscriber` model to
     keep track of the people that have requested our messages. We also have saved
@@ -90,13 +90,13 @@
       subscription status: `add` and `remove`.  These commands will
       toggle a boolean flag for their `Subscriber` record in the database, and
       will determine whether or not they want to receive messages from our marketing
-      campaign. We're not jerks, we don't opt them in automatically -
-      rather, we have them confirm that they want to receive our messages.
+      campaign. Because we want to respect our users' desires, we don't opt them in
+      automatically -rather, we have them confirm that they want to receive our messages.
 
       To make this happen, we will need to update the controller logic which
       handles the incoming text message to do a couple things:
 
-      * If the texter is a person already in the database, parse the message
+      * If the user is a person already in the database, parse the message
       they sent to see if it's a command we recognize.
       * If it is a `add` or `remove` command, update their
       subscription status in the database.
@@ -110,28 +110,28 @@
   :markdown
     ## Sending Notifications
 
-    On the server, we grab the message text and image URL, then loop through all
+    On the server, we grab the message's text and image URL, then loop through all
     Subscribers and call the method `Send` on our `MessageSender` domain object
     to send the message.
 
-    When the messages are on their way, we redirect back to the same form
+    When the messages are on their way, we redirect them back to the same form
     with a [ViewBag
     Property](//msdn.microsoft.com/en-us/library/system.web.mvc.controllerbase.viewbag.aspx)
     message containing feedback about the messaging attempt.
 
 .step(
-  data-title='Send SMS or MMS Notifications',
+  data-title='Sending SMS or MMS Notifications',
   data-file='MarketingNotifications.Web/Domain/MessageSender.cs'
   data-highlight='11-31')
   :markdown
-    ## Send SMS or MMS Notifications
+    ## Sending SMS or MMS Notifications
 
     Now that we have a list of subscribers for our awesome SMS and MMS content,
     we need to provide our marketing team some kind of interface to send out
     messages.
 
     When the model object is loaded, it creates a [Twilio REST API
-    client](https://github.com/twilio/twilio-csharp) that it can use to send SMS and
+    client](https://github.com/twilio/twilio-csharp) that it can be used to send SMS and
     MMS messages. The client requires your Twilio account credentials (an
     account SID and auth token), which can be found [in the account
     portal](/user/account).
@@ -157,6 +157,6 @@
 
     ### Did this help?
 
-    Thanks for checking out this tutorial! If you have any feedback
+    Thanks for checking this tutorial out! If you have any feedback
     to share with us, we'd love to hear it.
-    [Contact support](//www.twilio.com/help/contact) to let us know what you think.
+    [Contact the Twilio Developer Education Team](mailto:deved-oss@twilio.com) to let us know what you think.
