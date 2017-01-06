@@ -1,8 +1,10 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
+using System;
 using MarketingNotifications.Web.Domain;
 using MarketingNotifications.Web.Models.Repository;
 using MarketingNotifications.Web.ViewModels;
+using System.Collections.Generic;
 
 namespace MarketingNotifications.Web.Controllers
 {
@@ -33,13 +35,16 @@ namespace MarketingNotifications.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                Uri mediaUri = new Uri(model.ImageUrl);
+                List<Uri> mediaUrl = new List<Uri> { mediaUri };
                 var subscribers = await _repository.FindActiveSubscribersAsync();
                 subscribers.ForEach(subscriber =>
                 {
+                    
                     _messageSender.Send(
                         subscriber.PhoneNumber,
                         model.Message,
-                        model.ImageUrl);
+                        mediaUrl);
                 });
 
                 ModelState.Clear();

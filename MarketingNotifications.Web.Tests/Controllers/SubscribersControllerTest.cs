@@ -19,7 +19,7 @@ namespace MarketingNotifications.Web.Tests.Controllers
 
             var controller = new SubscribersController(mockRepository.Object);
             controller.WithCallTo(c => c.Register("555-5555", string.Empty))
-                .ShouldReturnTwiMLResult(data =>
+                .ShouldReturnXmlResult(data =>
                 {
                     StringAssert.Contains("Thanks", data.XPathSelectElement("Response/Message").Value);
                 });

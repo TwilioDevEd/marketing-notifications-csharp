@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using MarketingNotifications.Web.Controllers;
 using MarketingNotifications.Web.Domain;
 using MarketingNotifications.Web.Models;
@@ -33,7 +34,7 @@ namespace MarketingNotifications.Web.Tests.Controllers
                     new Subscriber(),
                 });
 
-            var model = new NotificationViewModel();
+            var model = new NotificationViewModel { ImageUrl = "http://example.com/image.png"  };
             var controller =
                 new NotificationsController(mockRepository.Object, mockMessageSender.Object);
 
@@ -41,7 +42,7 @@ namespace MarketingNotifications.Web.Tests.Controllers
                 .ShouldRenderDefaultView();
 
             mockMessageSender.Verify(m => m.Send(
-                It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
+                It.IsAny<string>(), It.IsAny<string>(), It.IsAny<List<Uri>>()), Times.Exactly(2));
         }
 
         [Test]

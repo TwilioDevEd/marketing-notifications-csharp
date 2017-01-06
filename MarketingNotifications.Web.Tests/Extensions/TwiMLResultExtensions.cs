@@ -1,13 +1,13 @@
 ﻿using System.Reflection;
-using Twilio.TwiML.Mvc;
+using System.Web.Mvc;
 
 namespace MarketingNotifications.Web.Tests.Extensions
 {
     public static class TwiMLResultExtensions
     {
-        public static object Data(this TwiMLResult twiMLResult)
+        public static object Data(this ContentResult xmlResult)
         {
-            return GetInstanceField(typeof(TwiMLResult), twiMLResult, "data");
+            return GetInstanceField(typeof(ContentResult), xmlResult, "data");
         }
 
         private static object GetInstanceField(IReflect type, object instance, string fieldName)
