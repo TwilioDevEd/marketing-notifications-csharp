@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using MarketingNotifications.Web.Domain;
 using MarketingNotifications.Web.Models.Repository;
@@ -20,7 +19,7 @@ namespace MarketingNotifications.Web.Controllers
 
         // POST: Subscribers/Register
         [HttpPost]
-        public async Task<ActionResult> Register(string from, String body)
+        public async Task<ActionResult> Register(string from, string body)
         {
             var phoneNumber = from;
             var message = body;

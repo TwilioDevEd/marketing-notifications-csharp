@@ -35,17 +35,15 @@ namespace MarketingNotifications.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                Uri mediaUri = new Uri(model.ImageUrl);
-                List<Uri> mediaUrl = new List<Uri> { mediaUri };
+                var mediaUrl = new List<Uri> { new Uri(model.ImageUrl) };
                 var subscribers = await _repository.FindActiveSubscribersAsync();
-                subscribers.ForEach(subscriber =>
+                foreach (var subscriber in subscribers)
                 {
-                    
-                    _messageSender.Send(
+                    await _messageSender.Send(
                         subscriber.PhoneNumber,
                         model.Message,
                         mediaUrl);
-                });
+                }
 
                 ModelState.Clear();
                 ViewBag.FlashMessage = "Messages on their way!";

@@ -16,7 +16,7 @@ namespace MarketingNotifications.Web.Domain
             _repository = repository;
         }
 
-        public async Task<String> Create(string phoneNumber, string message)
+        public async Task<string> Create(string phoneNumber, string message)
         {
             var subscriber = await _repository.FindByPhoneNumberAsync(phoneNumber);
             if (subscriber != null)
