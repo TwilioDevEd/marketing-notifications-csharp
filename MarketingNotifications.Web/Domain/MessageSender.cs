@@ -1,6 +1,7 @@
 ﻿using MarketingNotifications.Web.Domain.Twilio;
 using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
 using Twilio;
@@ -9,7 +10,7 @@ namespace MarketingNotifications.Web.Domain
 {
     public interface IMessageSender
     {
-        MessageResource Send(string to, string body, List<Uri> mediaUrl);
+        Task<MessageResource> Send(string to, string body, List<Uri> mediaUrl);
     }
 
     public class MessageSender : IMessageSender
@@ -22,14 +23,13 @@ namespace MarketingNotifications.Web.Domain
             }
         }
 
-        public MessageResource Send(string to, string body, List<Uri> mediaUrl)
+        public async Task<MessageResource> Send(string to, string body, List<Uri> mediaUrl)
         {
-            return MessageResource.Create(
+            return await MessageResource.CreateAsync(
                 from: new PhoneNumber(Configuration.PhoneNumbers.Twilio),
                 to: new PhoneNumber(to),
                 body: body,
-                mediaUrl: mediaUrl
-                );
+                mediaUrl: mediaUrl);
         }
     }
 }
