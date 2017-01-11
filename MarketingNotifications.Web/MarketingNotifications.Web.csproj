@@ -135,7 +135,7 @@
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\SubscribersController.cs" />
     <Compile Include="Domain\MessageCreator.cs" />
-    <Compile Include="Domain\MessageSender.cs" />
+    <Compile Include="Domain\NotificationService.cs" />
     <Compile Include="Domain\Twilio\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

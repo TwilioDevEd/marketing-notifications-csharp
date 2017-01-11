@@ -8,14 +8,14 @@ using Twilio;
 
 namespace MarketingNotifications.Web.Domain
 {
-    public interface IMessageSender
+    public interface INotificationService
     {
-        Task<MessageResource> Send(string to, string body, List<Uri> mediaUrl);
+        Task<MessageResource> SendMessageAsync(string to, string body, List<Uri> mediaUrl);
     }
 
-    public class MessageSender : IMessageSender
+    public class NotificationService : INotificationService
     {
-        public MessageSender()
+        public NotificationService()
         {
             if (Configuration.Credentials.AccountSID != null && Configuration.Credentials.AuthToken != null)
             {
@@ -23,7 +23,7 @@ namespace MarketingNotifications.Web.Domain
             }
         }
 
-        public async Task<MessageResource> Send(string to, string body, List<Uri> mediaUrl)
+        public async Task<MessageResource> SendMessageAsync(string to, string body, List<Uri> mediaUrl)
         {
             return await MessageResource.CreateAsync(
                 from: new PhoneNumber(Configuration.PhoneNumbers.Twilio),
