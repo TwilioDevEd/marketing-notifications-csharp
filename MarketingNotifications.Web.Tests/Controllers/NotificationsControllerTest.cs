@@ -25,7 +25,7 @@ namespace MarketingNotifications.Web.Tests.Controllers
         [Test]
         public void GivenACreateAction_WhenModelStateIsValid_ThenRendersDefaultViewWithoutModel()
         {
-            var mockMessageSender = new Mock<IMessageSender>();
+            var mockMessageSender = new Mock<INotificationService>();
             var mockRepository = new Mock<ISubscribersRepository>();
             mockRepository.Setup(r => r.FindActiveSubscribersAsync()).ReturnsAsync(
                 new List<Subscriber>
@@ -41,7 +41,7 @@ namespace MarketingNotifications.Web.Tests.Controllers
             controller.WithCallTo(c => c.Create(model))
                 .ShouldRenderDefaultView();
 
-            mockMessageSender.Verify(m => m.Send(
+            mockMessageSender.Verify(m => m.SendMessageAsync(
                 It.IsAny<string>(), It.IsAny<string>(), It.IsAny<List<Uri>>()), Times.Exactly(2));
         }
 
