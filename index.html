@@ -23,7 +23,7 @@ message that will go out to all subscribers via SMS/MMS message.</li>
 <h2 id="building-blocks">Building Blocks</h2>
 <p>To get this done, you&#39;ll be working with the following Twilio APIs:</p>
 <ul>
-<li><a href="//www.local.twilio.com/docs/api/twiml">TwiML</a> and the <a href="/docs/api/twiml/sms/message">&lt;Message&gt;
+<li><a href="/docs/api/twiml">TwiML</a> and the <a href="/docs/api/twiml/sms/message">&lt;Message&gt;
 Verb</a>: We&#39;ll use TwiML to manage interactions
 initiated by the user via SMS.</li>
 <li><a href="/docs/api/rest/sending-sms">Messages Resource</a>: We will use the REST API
@@ -55,7 +55,7 @@ subscribers.</p>
 <li><a href="//msdn.microsoft.com/en-us/magazine/dn802603.aspx">Introduction to Async/Await on ASP.NET</a></li>
 <li><a href="//github.com/twilio/twilio-csharp/wiki/Twilio.TwiML">Twilio TwiML</a></li>
 </ul>
-</div><div data-title="Creating Subscribers" data-file="MarketingNotifications.Web/Domain/MessageCreator.cs" data-highlight="17-36" class="step"><h2 id="creating-subscribers">Creating Subscribers</h2>
+</div><div data-title="Creating Subscribers" data-file="MarketingNotifications.Web/Domain/MessageCreator.cs" data-highlight="19-36" class="step"><h2 id="creating-subscribers">Creating Subscribers</h2>
 <p>We begin by getting the user&#39;s phone number from the incoming <a href="/docs/api/twiml/sms/twilio_request">Twilio
 request</a>. Now, we need to find a
 <code>Subscriber</code> model with that phone number.</p>
@@ -94,10 +94,10 @@ message containing feedback about the messaging attempt.</p>
 <p>Now that we have a list of subscribers for our awesome SMS and MMS content,
 we need to provide our marketing team some kind of interface to send out
 messages.</p>
-<p>When the model object is loaded, it creates a <a href="https://github.com/twilio/twilio-csharp">Twilio REST API
+<p>When the model object is loaded, it creates a <a href="//github.com/twilio/twilio-csharp">Twilio REST API
 client</a> that it can be used to send SMS and
 MMS messages. The client requires your Twilio account credentials (an
-account SID and auth token), which can be found <a href="/user/account">in the account
+account SID and auth token), which can be found <a href="/console">in the account
 portal</a>.</p>
 <p>Next all we need to do is call <code>_client.SendMessageAsync</code> on the client object in
 order to send our message. The Twilio Message API call requires a &#39;From&#39; and

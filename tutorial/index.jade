@@ -16,7 +16,7 @@
 
     To get this done, you'll be working with the following Twilio APIs:
 
-    * [TwiML](//www.local.twilio.com/docs/api/twiml) and the [<Message>
+    * [TwiML](/docs/api/twiml) and the [<Message>
     Verb](/docs/api/twiml/sms/message): We'll use TwiML to manage interactions
     initiated by the user via SMS.
     * [Messages Resource](/docs/api/rest/sending-sms): We will use the REST API
@@ -63,7 +63,7 @@
 .step(
   data-title='Creating Subscribers',
   data-file='MarketingNotifications.Web/Domain/MessageCreator.cs'
-  data-highlight='17-36')
+  data-highlight='19-36')
   :markdown
     ## Creating Subscribers
 
@@ -131,10 +131,10 @@
     messages.
 
     When the model object is loaded, it creates a [Twilio REST API
-    client](https://github.com/twilio/twilio-csharp) that it can be used to send SMS and
+    client](//github.com/twilio/twilio-csharp) that it can be used to send SMS and
     MMS messages. The client requires your Twilio account credentials (an
     account SID and auth token), which can be found [in the account
-    portal](/user/account).
+    portal](/console).
 
     Next all we need to do is call `_client.SendMessageAsync` on the client object in
     order to send our message. The Twilio Message API call requires a 'From' and
