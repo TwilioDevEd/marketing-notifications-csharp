@@ -16,7 +16,7 @@
 
     To get this done, you'll be working with the following Twilio APIs:
 
-    * [TwiML](//www.local.twilio.com/docs/api/twiml) and the [<Message>
+    * [TwiML](/docs/api/twiml) and the [<Message>
     Verb](/docs/api/twiml/sms/message): We'll use TwiML to manage interactions
     initiated by the user via SMS.
     * [Messages Resource](/docs/api/rest/sending-sms): We will use the REST API
@@ -45,9 +45,9 @@
 .step(
   data-title='Handling Incoming Messages',
   data-file='MarketingNotifications.Web/Controllers/SubscribersController.cs'
-  data-highlight='22-37')
+  data-highlight='20-34')
   :markdown
-    ## Handling Incoming messages
+    ## Handling Incoming Messages
 
     This is the endpoint that will be called every time our application receives
     a message.
@@ -63,7 +63,7 @@
 .step(
   data-title='Creating Subscribers',
   data-file='MarketingNotifications.Web/Domain/MessageCreator.cs'
-  data-highlight='17-36')
+  data-highlight='19-36')
   :markdown
     ## Creating Subscribers
 
@@ -106,12 +106,12 @@
 .step(
   data-title='Sending Notifications',
   data-file='MarketingNotifications.Web/Controllers/NotificationsController.cs'
-  data-highlight='30-51')
+  data-highlight='32-54')
   :markdown
     ## Sending Notifications
 
     On the server, we grab the message's text and image URL, then loop through all
-    Subscribers and call the method `Send` on our `MessageSender` domain object
+    Subscribers and call the method `Send` on our `NotificationService` domain object
     to send the message.
 
     When the messages are on their way, we redirect them back to the same form
@@ -121,8 +121,8 @@
 
 .step(
   data-title='Sending SMS or MMS Notifications',
-  data-file='MarketingNotifications.Web/Domain/MessageSender.cs'
-  data-highlight='11-31')
+  data-file='MarketingNotifications.Web/Domain/NotificationService.cs'
+  data-highlight='11-34')
   :markdown
     ## Sending SMS or MMS Notifications
 
@@ -131,12 +131,12 @@
     messages.
 
     When the model object is loaded, it creates a [Twilio REST API
-    client](https://github.com/twilio/twilio-csharp) that it can be used to send SMS and
+    client](//github.com/twilio/twilio-csharp) that it can be used to send SMS and
     MMS messages. The client requires your Twilio account credentials (an
     account SID and auth token), which can be found [in the account
-    portal](/user/account).
+    portal](/console).
 
-    Next all we need to do is call `_client.SendMessage` on the client object in
+    Next all we need to do is call `_client.SendMessageAsync` on the client object in
     order to send our message. The Twilio Message API call requires a 'From' and
     'To' parameter, and either a 'Body' or a 'MediaUrl' attribute (or both).
 

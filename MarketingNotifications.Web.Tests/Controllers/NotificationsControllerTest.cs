@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using MarketingNotifications.Web.Controllers;
 using MarketingNotifications.Web.Domain;
 using MarketingNotifications.Web.Models;
@@ -24,7 +25,7 @@ namespace MarketingNotifications.Web.Tests.Controllers
         [Test]
         public void GivenACreateAction_WhenModelStateIsValid_ThenRendersDefaultViewWithoutModel()
         {
-            var mockMessageSender = new Mock<IMessageSender>();
+            var mockMessageSender = new Mock<INotificationService>();
             var mockRepository = new Mock<ISubscribersRepository>();
             mockRepository.Setup(r => r.FindActiveSubscribersAsync()).ReturnsAsync(
                 new List<Subscriber>
@@ -33,15 +34,15 @@ namespace MarketingNotifications.Web.Tests.Controllers
                     new Subscriber(),
                 });
 
-            var model = new NotificationViewModel();
+            var model = new NotificationViewModel { ImageUrl = "http://example.com/image.png"  };
             var controller =
                 new NotificationsController(mockRepository.Object, mockMessageSender.Object);
 
             controller.WithCallTo(c => c.Create(model))
                 .ShouldRenderDefaultView();
 
-            mockMessageSender.Verify(m => m.Send(
-                It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
+            mockMessageSender.Verify(m => m.SendMessageAsync(
+                It.IsAny<string>(), It.IsAny<string>(), It.IsAny<List<Uri>>()), Times.Exactly(2));
         }
 
         [Test]

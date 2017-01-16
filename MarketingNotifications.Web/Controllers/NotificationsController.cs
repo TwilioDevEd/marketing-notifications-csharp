@@ -1,23 +1,25 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
+using System;
 using MarketingNotifications.Web.Domain;
 using MarketingNotifications.Web.Models.Repository;
 using MarketingNotifications.Web.ViewModels;
+using System.Collections.Generic;
 
 namespace MarketingNotifications.Web.Controllers
 {
     public class NotificationsController : Controller
     {
         private readonly ISubscribersRepository _repository;
-        private readonly IMessageSender _messageSender;
+        private readonly INotificationService _notificationService;
 
-        public NotificationsController() : this(new SubscribersRepository(), new MessageSender())
+        public NotificationsController() : this(new SubscribersRepository(), new NotificationService())
         {
         }
 
-        public NotificationsController(ISubscribersRepository repository, IMessageSender messageSender)
+        public NotificationsController(ISubscribersRepository repository, INotificationService notificationService)
         {
-            _messageSender = messageSender;
+            _notificationService = notificationService;
             _repository = repository;
         }
 
@@ -33,14 +35,15 @@ namespace MarketingNotifications.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var mediaUrl = new List<Uri> { new Uri(model.ImageUrl) };
                 var subscribers = await _repository.FindActiveSubscribersAsync();
-                subscribers.ForEach(subscriber =>
+                foreach (var subscriber in subscribers)
                 {
-                    _messageSender.Send(
+                    await _notificationService.SendMessageAsync(
                         subscriber.PhoneNumber,
                         model.Message,
-                        model.ImageUrl);
-                });
+                        mediaUrl);
+                }
 
                 ModelState.Clear();
                 ViewBag.FlashMessage = "Messages on their way!";

@@ -7,13 +7,12 @@ using NUnit.Framework;
 
 namespace MarketingNotifications.Web.Tests.Domain
 {
-    class MessageCreatorTest
+    public class MessageCreatorTest
     {
         [Test]
         public async Task WhenSubscriberDoesNotExist_ThenResponseContainsThanksMessage()
         {
             var mockRepository = new Mock<ISubscribersRepository>();
-            mockRepository.Setup(r => r.FindByPhoneNumberAsync(It.IsAny<string>())).ReturnsAsync(null);
 
             var messageCreator = new MessageCreator(mockRepository.Object);
             var message = await messageCreator.Create("555-5555", "");
