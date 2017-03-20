@@ -2,11 +2,12 @@
 using System.Web.Mvc;
 using MarketingNotifications.Web.Domain;
 using MarketingNotifications.Web.Models.Repository;
+using Twilio.AspNet.Mvc;
 using Twilio.TwiML;
 
 namespace MarketingNotifications.Web.Controllers
 {
-    public class SubscribersController : Controller
+    public class SubscribersController : TwilioController
     {
         private readonly ISubscribersRepository _repository;
 
@@ -19,7 +20,7 @@ namespace MarketingNotifications.Web.Controllers
 
         // POST: Subscribers/Register
         [HttpPost]
-        public async Task<ActionResult> Register(string from, string body)
+        public async Task<TwiMLResult> Register(string from, string body)
         {
             var phoneNumber = from;
             var message = body;
@@ -30,7 +31,7 @@ namespace MarketingNotifications.Web.Controllers
             var response = new MessagingResponse();
             response.Message(outputMessage);
 
-            return Content(response.ToString(), "text/xml");
+            return TwiML(response);
         }
     }
 }
