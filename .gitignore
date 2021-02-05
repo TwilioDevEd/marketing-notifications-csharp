@@ -197,3 +197,7 @@ FakesAssemblies/
 
 # Project
 MarketingNotifications.Web/Local.config
+
+# Libman
+**/Scripts/lib/
+!.gitkeep

@@ -4,7 +4,7 @@
 
 # SMS Notifications with Twilio and ASP.NET MVC
 
-[![Build status](https://ci.appveyor.com/api/projects/status/8qo4wqir0ev9es59?svg=true)](https://ci.appveyor.com/project/TwilioDevEd/marketing-notifications-csharp)
+![](https://github.com/TwilioDevEd/marketing-notifications-csharp/workflows/NetFx/badge.svg)
 
 With the amount of noise in social media and e-mail inboxes, it's hard to make a meaningful connection with your customers or audience. SMS text and/or MMS picture messages, however, are a personal communication channel with an open rate above 95%, which make them a great choice for social communication.
 
@@ -21,15 +21,8 @@ In this tutorial, you will learn how to enable your users to opt-in for an SMS m
    cd marketing-notifications-csharp
    ```
 
-1. Create a new file `MarketingNotifications.Web/Local.config` and update the content.
+1. Rename the file `MarketingNotifications.Web/Local.config.example` to `MarketingNotifications.Web/Local.config`  and update the content.
 
-   ```xml
-   <appSettings>
-     <add key="TwilioAccountSid" value="Your Twilio Account SID" />
-     <add key="TwilioAuthToken" value="Your Twilio Auth Token" />
-     <add key="TwilioPhoneNumber" value="Your Twilio Phone Number" />
-   </appSettings>
-   ```
    You can find your `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` in your
    [Twilio Account Settings](https://www.twilio.com/user/account/settings).
    You will also need a `TWILIO_NUMBER`, which you may find [here](https://www.twilio.com/user/account/phone-numbers/incoming).
@@ -38,6 +31,7 @@ In this tutorial, you will learn how to enable your users to opt-in for an SMS m
 
 1. Run `Update-Database` at [Package Manager Console](https://docs.nuget.org/consume/package-manager-console) to execute the migrations.
 
+   Be sure to ckeck SQLServer 2019 (with LocalDB support) is up and running and the server name matches the one from the connection string on `MarketingNotifications.web/Web.config`.
 1. Run the application.
 
 1. Expose application to the wider internet.
@@ -58,11 +52,11 @@ In this tutorial, you will learn how to enable your users to opt-in for an SMS m
   Go to your dashboard on [Twilio](https://www.twilio.com/user/account/phone-numbers/incoming). Click on Twilio Numbers and choose a number to setup.
   On the phone number page enter the address provided by ngrok into the _Messaging_ Request URL field.
 
-  ![Request URL](http://howtodocs.s3.amazonaws.com/setup-twilio-number.png)
-
 1. Wrap Up!
 
   By now your application should be up and running at [http://localhost:1086/](http://localhost:1086/). Now your subscribers will be able to text your new Twilio number to subscribe to your Marketing Notifications service.
+  
+  To subscribe, just send any message to your configured Twilio phone number and it will reply with a text.
 
 ## Meta
 
